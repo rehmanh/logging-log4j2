@@ -27,11 +27,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.util.List;
 
 import org.apache.logging.log4j.junit.StatusLoggerLevel;
-import org.apache.logging.log4j.message.Message;
-import org.apache.logging.log4j.message.ObjectMessage;
-import org.apache.logging.log4j.message.ParameterizedMessage;
-import org.apache.logging.log4j.message.ParameterizedMessageFactory;
-import org.apache.logging.log4j.message.SimpleMessage;
+import org.apache.logging.log4j.message.*;
 import org.apache.logging.log4j.spi.AbstractLogger;
 import org.apache.logging.log4j.spi.MessageFactory2Adapter;
 import org.apache.logging.log4j.status.StatusData;
@@ -68,29 +64,29 @@ public class AbstractLoggerTest {
     private static final String MARKER_NAME = "TEST";
 
     private static final LogEvent[] EVENTS = new LogEvent[] {
-        new LogEvent(null, simple, null),
-        new LogEvent(MARKER_NAME, simple, null),
-        new LogEvent(null, simple, t),
-        new LogEvent(MARKER_NAME, simple, t),
+            new LogEvent(null, simple, null),
+            new LogEvent(MARKER_NAME, simple, null),
+            new LogEvent(null, simple, t),
+            new LogEvent(MARKER_NAME, simple, t),
 
-        new LogEvent(null, object, null),
-        new LogEvent(MARKER_NAME, object, null),
-        new LogEvent(null, object, t),
-        new LogEvent(MARKER_NAME, object, t),
+            new LogEvent(null, object, null),
+            new LogEvent(MARKER_NAME, object, null),
+            new LogEvent(null, object, t),
+            new LogEvent(MARKER_NAME, object, t),
 
-        new LogEvent(null, param, null),
-        new LogEvent(MARKER_NAME, param, null),
+            new LogEvent(null, param, null),
+            new LogEvent(MARKER_NAME, param, null),
 
-        new LogEvent(null, simple, null),
-        new LogEvent(null, simple, t),
-        new LogEvent(MARKER_NAME, simple, null),
-        new LogEvent(MARKER_NAME, simple, t),
-        new LogEvent(MARKER_NAME, simple, null),
+            new LogEvent(null, simple, null),
+            new LogEvent(null, simple, t),
+            new LogEvent(MARKER_NAME, simple, null),
+            new LogEvent(MARKER_NAME, simple, t),
+            new LogEvent(MARKER_NAME, simple, null),
 
-        new LogEvent(null, charSeq, null),
-        new LogEvent(null, charSeq, t),
-        new LogEvent(MARKER_NAME, charSeq, null),
-        new LogEvent(MARKER_NAME, charSeq, t),
+            new LogEvent(null, charSeq, null),
+            new LogEvent(null, charSeq, t),
+            new LogEvent(MARKER_NAME, charSeq, null),
+            new LogEvent(MARKER_NAME, charSeq, t),
     };
 
 
@@ -920,38 +916,39 @@ public class AbstractLoggerTest {
                         "java.lang.IllegalStateException logging TestMessage: "));
     }
 
-    private static final class TestMessage implements Message {
-        private final FormattedMessageSupplier formattedMessageSupplier;
-        private final String format;
-        TestMessage(final FormattedMessageSupplier formattedMessageSupplier, final String format) {
-            this.formattedMessageSupplier = formattedMessageSupplier;
-            this.format = format;
-        }
-
-        @Override
-        public String getFormattedMessage() {
-            return formattedMessageSupplier.getFormattedMessage();
-        }
-
-        @Override
-        public String getFormat() {
-            return format;
-        }
-
-        @Override
-        public Object[] getParameters() {
-            return Constants.EMPTY_OBJECT_ARRAY;
-        }
-
-        @Override
-        public Throwable getThrowable() {
-            return null;
-        }
-
-        interface FormattedMessageSupplier {
-            String getFormattedMessage();
-        }
-    }
+//    private static final class TestMessage implements Message {
+//        private final FormattedMessageSupplier formattedMessageSupplier;
+//        private final String format;
+//
+//        TestMessage(final FormattedMessageSupplier formattedMessageSupplier, final String format) {
+//            this.formattedMessageSupplier = formattedMessageSupplier;
+//            this.format = format;
+//        }
+//
+//        @Override
+//        public String getFormattedMessage() {
+//            return formattedMessageSupplier.getFormattedMessage();
+//        }
+//
+//        @Override
+//        public String getFormat() {
+//            return format;
+//        }
+//
+//        @Override
+//        public Object[] getParameters() {
+//            return Constants.EMPTY_OBJECT_ARRAY;
+//        }
+//
+//        @Override
+//        public Throwable getThrowable() {
+//            return null;
+//        }
+//
+//        interface FormattedMessageSupplier {
+//            String getFormattedMessage();
+//        }
+//    }
 
     private static class CountingLogger extends AbstractLogger {
         private static final long serialVersionUID = -3171452617952475480L;
@@ -997,7 +994,7 @@ public class AbstractLoggerTest {
                 fail("Incorrect marker. Expected null. Actual is " + marker.getName());
             } else {
                 assertEquals(currentEvent.markerName, marker.getName(),
-                    "Incorrect marker. Expected " + currentEvent.markerName + ", actual " + marker.getName());
+                        "Incorrect marker. Expected " + currentEvent.markerName + ", actual " + marker.getName());
             }
             if (data == null) {
                 if (currentEvent.data != null) {
@@ -1007,10 +1004,10 @@ public class AbstractLoggerTest {
                 fail("Incorrect message. Expected null. Actual is " + data.getFormattedMessage());
             } else {
                 assertTrue(data.getClass().isAssignableFrom(currentEvent.data.getClass()),
-                    "Incorrect message type. Expected " + currentEvent.data + ", actual " + data);
+                        "Incorrect message type. Expected " + currentEvent.data + ", actual " + data);
                 assertEquals(currentEvent.data.getFormattedMessage(), data.getFormattedMessage(),
-                    "Incorrect message. Expected " + currentEvent.data.getFormattedMessage() + ", actual "
-                        + data.getFormattedMessage());
+                        "Incorrect message. Expected " + currentEvent.data.getFormattedMessage() + ", actual "
+                                + data.getFormattedMessage());
             }
             if (t == null) {
                 if (currentEvent.t != null) {
@@ -1122,7 +1119,7 @@ public class AbstractLoggerTest {
 
         @Override
         public void logMessage(final String fqcn, final Level level, final Marker marker, final Message data,
-            final Throwable t) {
+                               final Throwable t) {
             assertEquals(level, currentLevel, "Incorrect Level. Expected " + currentLevel + ", actual " + level);
             if (marker == null) {
                 if (currentEvent.markerName != null) {
@@ -1132,7 +1129,7 @@ public class AbstractLoggerTest {
                 fail("Incorrect marker. Expected null. Actual is " + marker.getName());
             } else {
                 assertEquals(currentEvent.markerName, marker.getName(),
-                    "Incorrect marker. Expected " + currentEvent.markerName + ", actual " + marker.getName());
+                        "Incorrect marker. Expected " + currentEvent.markerName + ", actual " + marker.getName());
             }
             if (data == null) {
                 if (currentEvent.data != null) {
@@ -1142,10 +1139,10 @@ public class AbstractLoggerTest {
                 fail("Incorrect message. Expected null. Actual is " + data.getFormattedMessage());
             } else {
                 assertTrue(data.getClass().isAssignableFrom(currentEvent.data.getClass()),
-                    "Incorrect message type. Expected " + currentEvent.data + ", actual " + data);
+                        "Incorrect message type. Expected " + currentEvent.data + ", actual " + data);
                 assertEquals(currentEvent.data.getFormattedMessage(), data.getFormattedMessage(),
-                    "Incorrect message. Expected " + currentEvent.data.getFormattedMessage() + ", actual "
-                        + data.getFormattedMessage());
+                        "Incorrect message. Expected " + currentEvent.data.getFormattedMessage() + ", actual "
+                                + data.getFormattedMessage());
             }
             if (t == null) {
                 if (currentEvent.t != null) {

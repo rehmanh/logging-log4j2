@@ -88,22 +88,22 @@
   </build>
   <reporting>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-changes-plugin</artifactId>
-        <version>${changes.plugin.version}</version>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>changes-report</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-        <configuration>
-          <issueLinkTemplate>%URL%/show_bug.cgi?id=%ISSUE%</issueLinkTemplate>
-          <useJql>true</useJql>
-        </configuration>
-      </plugin>
+      <!--      <plugin>-->
+      <!--        <groupId>org.apache.maven.plugins</groupId>-->
+      <!--        <artifactId>maven-changes-plugin</artifactId>-->
+      <!--        <version>${changes.plugin.version}</version>-->
+      <!--        <reportSets>-->
+      <!--          <reportSet>-->
+      <!--            <reports>-->
+      <!--              <report>changes-report</report>-->
+      <!--            </reports>-->
+      <!--          </reportSet>-->
+      <!--        </reportSets>-->
+      <!--        <configuration>-->
+      <!--          <issueLinkTemplate>%URL%/show_bug.cgi?id=%ISSUE%</issueLinkTemplate>-->
+      <!--          <useJql>true</useJql>-->
+      <!--        </configuration>-->
+      <!--      </plugin>-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
@@ -117,59 +117,59 @@
           <propertyExpansion>licensedir=${log4jParentDir}/checkstyle-header.txt</propertyExpansion>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>${javadoc.plugin.version}</version>
-        <configuration>
-          <bottom><![CDATA[<p align="center">Copyright &#169; {inceptionYear}-{currentYear} {organizationName}. All Rights Reserved.<br />
-            Apache Logging, Apache Log4j, Log4j, Apache, the Apache feather logo, the Apache Logging project logo,
-            and the Apache Log4j logo are trademarks of The Apache Software Foundation.</p>]]></bottom>
-          <!-- module link generation is completely broken in the javadoc plugin for a multi-module non-aggregating
-               project -->
-          <detectOfflineLinks>false</detectOfflineLinks>
-          <linksource>true</linksource>
-        </configuration>
-        <reportSets>
-          <reportSet>
-            <id>non-aggregate</id>
-            <reports>
-              <report>javadoc</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-      <plugin>
-        <groupId>com.github.spotbugs</groupId>
-        <artifactId>spotbugs-maven-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jxr-plugin</artifactId>
-        <version>${jxr.plugin.version}</version>
-        <reportSets>
-          <reportSet>
-            <id>non-aggregate</id>
-            <reports>
-              <report>jxr</report>
-            </reports>
-          </reportSet>
-          <reportSet>
-            <id>aggregate</id>
-            <reports>
-              <report>aggregate</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-pmd-plugin</artifactId>
-        <version>${pmd.plugin.version}</version>
-        <configuration>
-          <targetJdk>${maven.compiler.target}</targetJdk>
-        </configuration>
-      </plugin>
+      <!--      <plugin>-->
+      <!--        <groupId>org.apache.maven.plugins</groupId>-->
+      <!--        <artifactId>maven-javadoc-plugin</artifactId>-->
+      <!--        <version>${javadoc.plugin.version}</version>-->
+      <!--        <configuration>-->
+      <!--          <bottom><![CDATA[<p align="center">Copyright &#169; {inceptionYear}-{currentYear} {organizationName}. All Rights Reserved.<br />-->
+      <!--            Apache Logging, Apache Log4j, Log4j, Apache, the Apache feather logo, the Apache Logging project logo,-->
+      <!--            and the Apache Log4j logo are trademarks of The Apache Software Foundation.</p>]]></bottom>-->
+      <!--          &lt;!&ndash; module link generation is completely broken in the javadoc plugin for a multi-module non-aggregating-->
+      <!--               project &ndash;&gt;-->
+      <!--          <detectOfflineLinks>false</detectOfflineLinks>-->
+      <!--          <linksource>true</linksource>-->
+      <!--        </configuration>-->
+      <!--        <reportSets>-->
+      <!--          <reportSet>-->
+      <!--            <id>non-aggregate</id>-->
+      <!--            <reports>-->
+      <!--              <report>javadoc</report>-->
+      <!--            </reports>-->
+      <!--          </reportSet>-->
+      <!--        </reportSets>-->
+      <!--      </plugin>-->
+      <!--      <plugin>-->
+      <!--        <groupId>com.github.spotbugs</groupId>-->
+      <!--        <artifactId>spotbugs-maven-plugin</artifactId>-->
+      <!--      </plugin>-->
+      <!--      <plugin>-->
+      <!--        <groupId>org.apache.maven.plugins</groupId>-->
+      <!--        <artifactId>maven-jxr-plugin</artifactId>-->
+      <!--        <version>${jxr.plugin.version}</version>-->
+      <!--        <reportSets>-->
+      <!--          <reportSet>-->
+      <!--            <id>non-aggregate</id>-->
+      <!--            <reports>-->
+      <!--              <report>jxr</report>-->
+      <!--            </reports>-->
+      <!--          </reportSet>-->
+      <!--          <reportSet>-->
+      <!--            <id>aggregate</id>-->
+      <!--            <reports>-->
+      <!--              <report>aggregate</report>-->
+      <!--            </reports>-->
+      <!--          </reportSet>-->
+      <!--        </reportSets>-->
+      <!--      </plugin>-->
+      <!--      <plugin>-->
+      <!--        <groupId>org.apache.maven.plugins</groupId>-->
+      <!--        <artifactId>maven-pmd-plugin</artifactId>-->
+      <!--        <version>${pmd.plugin.version}</version>-->
+      <!--        <configuration>-->
+      <!--          <targetJdk>${maven.compiler.target}</targetJdk>-->
+      <!--        </configuration>-->
+      <!--      </plugin>-->
     </plugins>
   </reporting>
   <profiles>
@@ -184,16 +184,16 @@
       <properties>
         <toolsjar>${java.home}/../lib/jconsole.jar</toolsjar>
       </properties>
-      <dependencies>
-        <dependency>
-          <groupId>com.sun</groupId>
-          <artifactId>jconsole</artifactId>
-          <version>1.7.0</version>
-          <scope>system</scope>
-          <systemPath>${java.home}/../lib/jconsole.jar</systemPath>
-          <optional>true</optional>
-        </dependency>
-      </dependencies>
+      <!--      <dependencies>-->
+      <!--        <dependency>-->
+      <!--          <groupId>com.sun</groupId>-->
+      <!--          <artifactId>jconsole</artifactId>-->
+      <!--          <version>1.7.0</version>-->
+      <!--          <scope>system</scope>-->
+      <!--          <systemPath>${java.home}/../lib/jconsole.jar</systemPath>-->
+      <!--          <optional>true</optional>-->
+      <!--        </dependency>-->
+      <!--      </dependencies>-->
     </profile>
     <profile>
       <id>mac-profile</id>
@@ -203,16 +203,16 @@
           <exists>${java.home}/../Classes/jconsole.jar</exists>
         </file>
       </activation>
-      <dependencies>
-        <dependency>
-          <groupId>com.sun</groupId>
-          <artifactId>jconsole</artifactId>
-          <version>1.7.0</version>
-          <scope>system</scope>
-          <systemPath>${java.home}/../Classes/jconsole.jar</systemPath>
-          <optional>true</optional>
-        </dependency>
-      </dependencies>
+      <!--      <dependencies>-->
+      <!--        <dependency>-->
+      <!--          <groupId>com.sun</groupId>-->
+      <!--          <artifactId>jconsole</artifactId>-->
+      <!--          <version>1.7.0</version>-->
+      <!--          <scope>system</scope>-->
+      <!--          <systemPath>${java.home}/../Classes/jconsole.jar</systemPath>-->
+      <!--          <optional>true</optional>-->
+      <!--        </dependency>-->
+      <!--      </dependencies>-->
     </profile>
     <profile>
       <id>jenkins-profile</id>
@@ -222,16 +222,16 @@
           <name>jenkins</name>
         </property>
       </activation>
-      <dependencies>
-        <dependency>
-          <groupId>com.sun</groupId>
-          <artifactId>jconsole</artifactId>
-          <version>1.7.0</version>
-          <scope>system</scope>
-          <systemPath>${jenkins.java.home}/lib/jconsole.jar</systemPath>
-          <optional>true</optional>
-        </dependency>
-      </dependencies>
+      <!--      <dependencies>-->
+      <!--        <dependency>-->
+      <!--          <groupId>com.sun</groupId>-->
+      <!--          <artifactId>jconsole</artifactId>-->
+      <!--          <version>1.7.0</version>-->
+      <!--          <scope>system</scope>-->
+      <!--          <systemPath>${jenkins.java.home}/lib/jconsole.jar</systemPath>-->
+      <!--          <optional>true</optional>-->
+      <!--        </dependency>-->
+      <!--      </dependencies>-->
     </profile>
   </profiles>
 </project>

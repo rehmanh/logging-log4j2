@@ -18,6 +18,7 @@ package org.apache.log4j;
 
 import java.net.URI;
 
+import org.apache.log4j.helpers.BasicConfiguration;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.apache.logging.log4j.core.config.AbstractConfiguration;
@@ -46,25 +47,25 @@ public class BasicConfigurationFactory extends ConfigurationFactory {
         return new BasicConfiguration(loggerContext);
     }
 
-    public class BasicConfiguration extends AbstractConfiguration {
-
-        private static final long serialVersionUID = -2716784321395089563L;
-
-        private static final String DEFAULT_LEVEL = "org.apache.logging.log4j.level";
-
-        public BasicConfiguration(final LoggerContext loggerContext) {
-            super(loggerContext, ConfigurationSource.NULL_SOURCE);
-
-            final LoggerConfig root = getRootLogger();
-            setName("BasicConfiguration");
-            final String levelName = System.getProperty(DEFAULT_LEVEL);
-            final Level level = (levelName != null && Level.getLevel(levelName) != null) ? Level.getLevel(levelName)
-                    : Level.DEBUG;
-            root.setLevel(level);
-        }
-
-        @Override
-        protected void doConfigure() {
-        }
-    }
+//    public class BasicConfiguration extends AbstractConfiguration {
+//
+//        private static final long serialVersionUID = -2716784321395089563L;
+//
+//        private static final String DEFAULT_LEVEL = "org.apache.logging.log4j.level";
+//
+//        public BasicConfiguration(final LoggerContext loggerContext) {
+//            super(loggerContext, ConfigurationSource.NULL_SOURCE);
+//
+//            final LoggerConfig root = getRootLogger();
+//            setName("BasicConfiguration");
+//            final String levelName = System.getProperty(DEFAULT_LEVEL);
+//            final Level level = (levelName != null && Level.getLevel(levelName) != null) ? Level.getLevel(levelName)
+//                    : Level.DEBUG;
+//            root.setLevel(level);
+//        }
+//
+//        @Override
+//        protected void doConfigure() {
+//        }
+//    }
 }

@@ -49,30 +49,45 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 /**
  * Tests of Category.
  */
 public class CategoryTest {
 
-    static ConfigurationFactory cf = new BasicConfigurationFactory();
+    //static ConfigurationFactory cf = new BasicConfigurationFactory();
 
     private static final String VERSION1_APPENDER_NAME = "Version1List";
     private static final String VERSION2_APPENDER_NAME = "List";
     private static ListAppender appender = new ListAppender(VERSION2_APPENDER_NAME);
     private static org.apache.log4j.ListAppender version1Appender = new org.apache.log4j.ListAppender();
 
+    @Mock
+    private static BasicConfigurationFactory basicConfigurationFactory = new BasicConfigurationFactory();
+    @InjectMocks
+    private static ConfigurationFactory configurationFactory = basicConfigurationFactory;
+
+    @Before
+    public void init() {
+        System.out.println("---- Calling the setup Method ----");
+        MockitoAnnotations.openMocks(this);
+        ConfigurationFactory.setConfigurationFactory(configurationFactory);
+    }
+
     @BeforeClass
     public static void setupClass() {
         appender.start();
         version1Appender.setName(VERSION1_APPENDER_NAME);
-        ConfigurationFactory.setConfigurationFactory(cf);
+        ConfigurationFactory.setConfigurationFactory(configurationFactory);
         LoggerContext.getContext().reconfigure();
     }
 
     @AfterClass
     public static void cleanupClass() {
-        ConfigurationFactory.removeConfigurationFactory(cf);
+        ConfigurationFactory.removeConfigurationFactory(configurationFactory);
         appender.stop();
     }
 

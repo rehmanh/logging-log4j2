@@ -56,7 +56,7 @@
       <email>ggregory@apache.org</email>
       <url>https://www.garygregory.com</url>
       <organization>The Apache Software Foundation</organization>
-      <organizationUrl>https://www.apache.org/</organizationUrl>      
+      <organizationUrl>https://www.apache.org/</organizationUrl>
       <roles>
         <role>PMC Member</role>
       </roles>
@@ -145,7 +145,7 @@
         <role>PMC Member</role>
       </roles>
       <timezone>Europe/Amsterdam</timezone>
-    </developer>	  
+    </developer>
     <developer>
       <id>rgrabowski</id>
       <name>Ron Grabowski</name>
@@ -160,39 +160,39 @@
       <name>Piotr P. Karwasz</name>
       <email>pkarwasz@apache.org</email>
       <roles>
-	<role>PMC Member</role>
+        <role>Committer</role>
       </roles>
       <timezone>Europe/Warsaw</timezone>
     </developer>
   </developers>
   <!-- Contributors -->
   <contributors>
-      <contributor>
-        <name>Murad Ersoy</name>
-        <email>muradersoy@gmail.com</email>
-        <url>https://www.behance.net/muradersoy</url>
-        <roles>
-          <role>Illustrator and Designer</role>
-          <role>created the new Log4j 2 logo.</role>
-        </roles>
-        <timezone>Europe/Istanbul</timezone>
-        <properties>
-          <picUrl>https://mir-s3-cdn-cf.behance.net/user/138/403dcf1521581.54d67f8fb01f7.jpg</picUrl>
-        </properties>
-      </contributor>
-      <contributor>
-        <name>Michael Vorburger.ch</name>
-        <email>vorburger@apache.org</email>
-        <url>https://www.vorburger.ch</url>
-        <roles>
-          <role>https://github.com/apache/logging-log4j2/commits?author=vorburger</role>
-          <role>JULer</role>
-        </roles>
-        <timezone>Europe/Zurich</timezone>
-        <properties>
-          <picUrl>https://www.vorburger.ch/michael_vorburger_portrait_in_bay_of_roses_spain_with_bad_lighting.jpg</picUrl>
-        </properties>
-      </contributor>
+    <contributor>
+      <name>Murad Ersoy</name>
+      <email>muradersoy@gmail.com</email>
+      <url>https://www.behance.net/muradersoy</url>
+      <roles>
+        <role>Illustrator and Designer</role>
+        <role>created the new Log4j 2 logo.</role>
+      </roles>
+      <timezone>Europe/Istanbul</timezone>
+      <properties>
+        <picUrl>https://mir-s3-cdn-cf.behance.net/user/138/403dcf1521581.54d67f8fb01f7.jpg</picUrl>
+      </properties>
+    </contributor>
+    <contributor>
+      <name>Michael Vorburger.ch</name>
+      <email>vorburger@apache.org</email>
+      <url>https://www.vorburger.ch</url>
+      <roles>
+        <role>https://github.com/apache/logging-log4j2/commits?author=vorburger</role>
+        <role>JULer</role>
+      </roles>
+      <timezone>Europe/Zurich</timezone>
+      <properties>
+        <picUrl>https://www.vorburger.ch/michael_vorburger_portrait_in_bay_of_roses_spain_with_bad_lighting.jpg</picUrl>
+      </properties>
+    </contributor>
   </contributors>
   <mailingLists>
     <mailingList>
@@ -323,30 +323,30 @@
       <id>apache</id>
       <url>https://repository.apache.org/content/repositories/releases/</url>
     </pluginRepository>
-<!--     <pluginRepository> -->
-<!--       <id>apache.snapshots</id> -->
-<!--       <name>Apache snapshots repository</name> -->
-<!--       <url>http://repository.apache.org/content/groups/snapshots</url> -->
-<!--       <snapshots> -->
-<!--         <enabled>true</enabled> -->
-<!--       </snapshots> -->
-<!--     </pluginRepository>     -->
+    <!--     <pluginRepository> -->
+    <!--       <id>apache.snapshots</id> -->
+    <!--       <name>Apache snapshots repository</name> -->
+    <!--       <url>http://repository.apache.org/content/groups/snapshots</url> -->
+    <!--       <snapshots> -->
+    <!--         <enabled>true</enabled> -->
+    <!--       </snapshots> -->
+    <!--     </pluginRepository>     -->
   </pluginRepositories>
   <dependencyManagement>
     <dependencies>
       <dependency>
-	<groupId>org.apache.logging.log4j</groupId>
-	<artifactId>log4j-bom</artifactId>
-	<version>${project.version}</version>
-	<type>pom</type>
-	<scope>import</scope>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-bom</artifactId>
+        <version>${project.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
         <version>${slf4jVersion}</version>
       </dependency>
-       <dependency>
+      <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-ext</artifactId>
         <version>${slf4jVersion}</version>
@@ -1272,10 +1272,10 @@
           <version>${jacoco.plugin.version}</version>
           <executions>
             <execution>
-                <id>prepare-agent</id>
-                <goals>
-                  <goal>prepare-agent</goal>
-                </goals>
+              <id>prepare-agent</id>
+              <goals>
+                <goal>prepare-agent</goal>
+              </goals>
             </execution>
             <execution>
               <id>default-report</id>
@@ -1441,14 +1441,14 @@
           <moduleExcludes>
             <xdoc>navigation.xml,changes.xml</xdoc>
           </moduleExcludes>
-          <asciidoc>
-            <attributes>
-              <!-- copy any site properties wanted in asciidoc files -->
-              <Log4jReleaseVersion>${Log4jReleaseVersion}</Log4jReleaseVersion>
-              <Log4jReleaseManager>${Log4jReleaseManager}</Log4jReleaseManager>
-              <Log4jReleaseKey>${Log4jReleaseKey}</Log4jReleaseKey>
-            </attributes>
-          </asciidoc>
+          <!--          <asciidoc>-->
+          <!--            <attributes>-->
+          <!--              &lt;!&ndash; copy any site properties wanted in asciidoc files &ndash;&gt;-->
+          <!--              <Log4jReleaseVersion>${Log4jReleaseVersion}</Log4jReleaseVersion>-->
+          <!--              <Log4jReleaseManager>${Log4jReleaseManager}</Log4jReleaseManager>-->
+          <!--              <Log4jReleaseKey>${Log4jReleaseKey}</Log4jReleaseKey>-->
+          <!--            </attributes>-->
+          <!--          </asciidoc>-->
         </configuration>
       </plugin>
       <!-- <plugin>
@@ -1595,69 +1595,69 @@
   <reporting>
     <plugins>
       <!-- Changes report -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-changes-plugin</artifactId>
-        <version>${changes.plugin.version}</version>
-        <inherited>false</inherited>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>changes-report</report>
-              <report>jira-report</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-        <configuration>
-          <statusIds>Resolved, Closed</statusIds>
-          <columnNames>Type,Key,Summary,Assignee,Status,Resolution,Fix Version</columnNames>
-          <useJql>true</useJql>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>2.9</version>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>index</report>
-              <report>dependencies</report>
-              <report>dependency-info</report>
-              <report>dependency-convergence</report>
-              <report>dependency-management</report>
-              <report>project-team</report>
-              <report>mailing-list</report>
-              <report>issue-tracking</report>
-              <report>license</report>
-              <report>scm</report>
-              <report>summary</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-        <configuration>
-          <!-- you'd think these would be the defaults, right? -->
-          <customBundle>${project.basedir}/src/site/custom/project-info-report.properties</customBundle>
-          <webAccessUrl>${project.scm.url}</webAccessUrl>
-          <anonymousConnection>${project.scm.connection}</anonymousConnection>
-          <developerConnection>${project.scm.developerConnection}</developerConnection>
-          <scmTag>rel/${Log4jReleaseVersion}</scmTag>
-        </configuration>
-      </plugin>
-      <!-- Surefire report -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-report-plugin</artifactId>
-        <version>${surefire.plugin.version}</version>
-        <reportSets>
-          <reportSet>
-            <id>integration-tests</id>
-            <reports>
-              <report>failsafe-report-only</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
+      <!--      <plugin>-->
+      <!--        <groupId>org.apache.maven.plugins</groupId>-->
+      <!--        <artifactId>maven-changes-plugin</artifactId>-->
+      <!--        <version>${changes.plugin.version}</version>-->
+      <!--        <inherited>false</inherited>-->
+      <!--        <reportSets>-->
+      <!--          <reportSet>-->
+      <!--            <reports>-->
+      <!--              <report>changes-report</report>-->
+      <!--              <report>jira-report</report>-->
+      <!--            </reports>-->
+      <!--          </reportSet>-->
+      <!--        </reportSets>-->
+      <!--        <configuration>-->
+      <!--          <statusIds>Resolved, Closed</statusIds>-->
+      <!--          <columnNames>Type,Key,Summary,Assignee,Status,Resolution,Fix Version</columnNames>-->
+      <!--          <useJql>true</useJql>-->
+      <!--        </configuration>-->
+      <!--      </plugin>-->
+      <!--      <plugin>-->
+      <!--        <groupId>org.apache.maven.plugins</groupId>-->
+      <!--        <artifactId>maven-project-info-reports-plugin</artifactId>-->
+      <!--        <version>2.9</version>-->
+      <!--        <reportSets>-->
+      <!--          <reportSet>-->
+      <!--            <reports>-->
+      <!--              <report>index</report>-->
+      <!--              <report>dependencies</report>-->
+      <!--              <report>dependency-info</report>-->
+      <!--              <report>dependency-convergence</report>-->
+      <!--              <report>dependency-management</report>-->
+      <!--              <report>project-team</report>-->
+      <!--              <report>mailing-list</report>-->
+      <!--              <report>issue-tracking</report>-->
+      <!--              <report>license</report>-->
+      <!--              <report>scm</report>-->
+      <!--              <report>summary</report>-->
+      <!--            </reports>-->
+      <!--          </reportSet>-->
+      <!--        </reportSets>-->
+      <!--        <configuration>-->
+      <!--          &lt;!&ndash; you'd think these would be the defaults, right? &ndash;&gt;-->
+      <!--          <customBundle>${project.basedir}/src/site/custom/project-info-report.properties</customBundle>-->
+      <!--          <webAccessUrl>${project.scm.url}</webAccessUrl>-->
+      <!--          <anonymousConnection>${project.scm.connection}</anonymousConnection>-->
+      <!--          <developerConnection>${project.scm.developerConnection}</developerConnection>-->
+      <!--          <scmTag>rel/${Log4jReleaseVersion}</scmTag>-->
+      <!--        </configuration>-->
+      <!--      </plugin>-->
+      <!--      &lt;!&ndash; Surefire report &ndash;&gt;-->
+      <!--      <plugin>-->
+      <!--        <groupId>org.apache.maven.plugins</groupId>-->
+      <!--        <artifactId>maven-surefire-report-plugin</artifactId>-->
+      <!--        <version>${surefire.plugin.version}</version>-->
+      <!--        <reportSets>-->
+      <!--          <reportSet>-->
+      <!--            <id>integration-tests</id>-->
+      <!--            <reports>-->
+      <!--              <report>failsafe-report-only</report>-->
+      <!--            </reports>-->
+      <!--          </reportSet>-->
+      <!--        </reportSets>-->
+      <!--      </plugin>-->
       <!-- RAT report -->
       <plugin>
         <groupId>org.apache.rat</groupId>
@@ -1784,37 +1784,37 @@
       <id>release-notes</id>
       <build>
         <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-changes-plugin</artifactId>
-            <version>${changes.plugin.version}</version>
-            <configuration>
-              <template>announcement.vm</template>
-              <templateDirectory>src/changes</templateDirectory>
-              <runOnlyAtExecutionRoot>true</runOnlyAtExecutionRoot>
-              <announcementDirectory>.</announcementDirectory>
-              <announcementFile>RELEASE-NOTES.md</announcementFile>
-              <issueManagementSystems>
-                <issueManagementSystem>changes.xml</issueManagementSystem>
-                <!--<issueManagementSystem>JIRA</issueManagementSystem> -->
-              </issueManagementSystems>
-              <version>${Log4jReleaseVersion}</version>
-              <announceParameters>
-                <releaseVersion>${Log4jReleaseVersion}</releaseVersion>
-                <releaseCount>${Log4jReleaseCount}</releaseCount>
-              </announceParameters>
-              <useJql>true</useJql>
-            </configuration>
-            <executions>
-              <execution>
-                <id>create-release-notes</id>
-                <phase>generate-resources</phase>
-                <goals>
-                  <goal>announcement-generate</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
+          <!--          <plugin>-->
+          <!--            <groupId>org.apache.maven.plugins</groupId>-->
+          <!--            <artifactId>maven-changes-plugin</artifactId>-->
+          <!--            <version>${changes.plugin.version}</version>-->
+          <!--            <configuration>-->
+          <!--              <template>announcement.vm</template>-->
+          <!--              <templateDirectory>src/changes</templateDirectory>-->
+          <!--              <runOnlyAtExecutionRoot>true</runOnlyAtExecutionRoot>-->
+          <!--              <announcementDirectory>.</announcementDirectory>-->
+          <!--              <announcementFile>RELEASE-NOTES.md</announcementFile>-->
+          <!--              <issueManagementSystems>-->
+          <!--                <issueManagementSystem>changes.xml</issueManagementSystem>-->
+          <!--                &lt;!&ndash;<issueManagementSystem>JIRA</issueManagementSystem> &ndash;&gt;-->
+          <!--              </issueManagementSystems>-->
+          <!--              <version>${Log4jReleaseVersion}</version>-->
+          <!--              <announceParameters>-->
+          <!--                <releaseVersion>${Log4jReleaseVersion}</releaseVersion>-->
+          <!--                <releaseCount>${Log4jReleaseCount}</releaseCount>-->
+          <!--              </announceParameters>-->
+          <!--              <useJql>true</useJql>-->
+          <!--            </configuration>-->
+          <!--            <executions>-->
+          <!--              <execution>-->
+          <!--                <id>create-release-notes</id>-->
+          <!--                <phase>generate-resources</phase>-->
+          <!--                <goals>-->
+          <!--                  <goal>announcement-generate</goal>-->
+          <!--                </goals>-->
+          <!--              </execution>-->
+          <!--            </executions>-->
+          <!--          </plugin>-->
         </plugins>
       </build>
     </profile>
@@ -1913,15 +1913,15 @@
       <properties>
         <yourkit.home>/Applications/YJP.app</yourkit.home>
       </properties>
-      <dependencies>
-        <dependency>
-          <groupId>com.yourkit</groupId>
-          <artifactId>yjp-controller-api-redist</artifactId>
-          <version>2013</version>
-          <scope>system</scope>
-          <systemPath>${yourkit.home}/lib/yjp-controller-api-redist.jar</systemPath>
-        </dependency>
-      </dependencies>
+      <!--      <dependencies>-->
+      <!--        <dependency>-->
+      <!--          <groupId>com.yourkit</groupId>-->
+      <!--          <artifactId>yjp-controller-api-redist</artifactId>-->
+      <!--          <version>2013</version>-->
+      <!--          <scope>system</scope>-->
+      <!--          <systemPath>${yourkit.home}/lib/yjp-controller-api-redist.jar</systemPath>-->
+      <!--        </dependency>-->
+      <!--      </dependencies>-->
       <build>
         <plugins>
           <plugin>

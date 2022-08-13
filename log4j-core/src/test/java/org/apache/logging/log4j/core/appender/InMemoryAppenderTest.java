@@ -21,20 +21,33 @@ import org.apache.logging.log4j.core.Layout;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.impl.Log4jLogEvent;
 import org.apache.logging.log4j.core.layout.PatternLayout;
+import org.apache.logging.log4j.core.layout.SpyByteBufferDestination;
 import org.apache.logging.log4j.message.SimpleMessage;
 import org.apache.logging.log4j.test.appender.InMemoryAppender;
 import org.apache.logging.log4j.util.Strings;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class InMemoryAppenderTest {
 
+    @Mock
+    InMemoryAppender app = null;
+
+    @Before
+    public void setup() {
+        app = Mockito.mock(InMemoryAppender.class);
+    }
+
     @Test
     public void testAppender() {
         final Layout<String> layout = PatternLayout.createDefaultLayout();
         final boolean writeHeader = true;
-        final InMemoryAppender app = new InMemoryAppender("test", layout, null, false, writeHeader);
+        //final InMemoryAppender app = new InMemoryAppender("test", layout, null, false, writeHeader);
+        app = Mockito.spy(new InMemoryAppender("test", layout, null, false, writeHeader));
         final String expectedHeader = null;
         assertMessage("Test", app, expectedHeader);
     }
@@ -43,7 +56,8 @@ public class InMemoryAppenderTest {
     public void testHeaderRequested() {
         final PatternLayout layout = PatternLayout.newBuilder().withHeader("HEADERHEADER").build();
         final boolean writeHeader = true;
-        final InMemoryAppender app = new InMemoryAppender("test", layout, null, false, writeHeader);
+        //final InMemoryAppender app = new InMemoryAppender("test", layout, null, false, writeHeader);
+        app = Mockito.spy(new InMemoryAppender("test", layout, null, false, writeHeader));
         final String expectedHeader = "HEADERHEADER";
         assertMessage("Test", app, expectedHeader);
     }
@@ -52,7 +66,8 @@ public class InMemoryAppenderTest {
     public void testHeaderSuppressed() {
         final PatternLayout layout = PatternLayout.newBuilder().withHeader("HEADERHEADER").build();
         final boolean writeHeader = false;
-        final InMemoryAppender app = new InMemoryAppender("test", layout, null, false, writeHeader);
+        // final InMemoryAppender app = new InMemoryAppender("test", layout, null, false, writeHeader);
+        app = Mockito.spy(new InMemoryAppender("test", layout, null, false, writeHeader));
         final String expectedHeader = null;
         assertMessage("Test", app, expectedHeader);
     }

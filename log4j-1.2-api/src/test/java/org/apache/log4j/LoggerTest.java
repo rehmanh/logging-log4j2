@@ -36,10 +36,12 @@ import org.apache.logging.log4j.core.config.ConfigurationFactory;
 import org.apache.logging.log4j.core.config.Property;
 import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.apache.logging.log4j.test.appender.ListAppender;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 /**
  * Used for internal unit testing the Logger class.
@@ -56,7 +58,20 @@ public class LoggerTest {
     // A short message.
     static String MSG = "M";
 
-    static ConfigurationFactory configurationFactory = new BasicConfigurationFactory();
+    //static ConfigurationFactory configurationFactory = new BasicConfigurationFactory();
+
+    @Mock
+    private static BasicConfigurationFactory basicConfigFactory = new BasicConfigurationFactory();
+
+    @InjectMocks
+    private static ConfigurationFactory configurationFactory = basicConfigFactory;
+
+    @Before
+    public void init() {
+        System.out.println("----Calling the setup method----");
+        MockitoAnnotations.openMocks(this);
+        ConfigurationFactory.setConfigurationFactory(configurationFactory);
+    }
 
     @BeforeClass
     public static void setUpClass() {
@@ -69,7 +84,7 @@ public class LoggerTest {
         rbCH = ResourceBundle.getBundle("L7D", new Locale("fr", "CH"));
         assertNotNull("Got a null resource bundle.", rbCH);
 
-        ConfigurationFactory.setConfigurationFactory(configurationFactory);
+        //ConfigurationFactory.setConfigurationFactory(configurationFactory);
     }
 
     @AfterClass
@@ -87,35 +102,35 @@ public class LoggerTest {
     /**
      * Add an appender and see if it can be retrieved.
      *  Skipping this test as the Appender interface isn't compatible with legacy Log4j.
-    public void testAppender1() {
-        logger = Logger.getLogger("test");
-        a1 = new ListAppender("testAppender1");
-        logger.addAppender(a1);
+     public void testAppender1() {
+     logger = Logger.getLogger("test");
+     a1 = new ListAppender("testAppender1");
+     logger.addAppender(a1);
 
-        Enumeration enumeration = logger.getAllAppenders();
-        Appender aHat = (Appender) enumeration.nextElement();
-        assertEquals(a1, aHat);
-    } */
+     Enumeration enumeration = logger.getAllAppenders();
+     Appender aHat = (Appender) enumeration.nextElement();
+     assertEquals(a1, aHat);
+     } */
 
     /**
      * Add an appender X, Y, remove X and check if Y is the only
      * remaining appender.
      * Skipping this test as the Appender interface isn't compatible with legacy Log4j.
-    public void testAppender2() {
-        a1 = new FileAppender();
-        a1.setName("testAppender2.1");
-        a2 = new FileAppender();
-        a2.setName("testAppender2.2");
+     public void testAppender2() {
+     a1 = new FileAppender();
+     a1.setName("testAppender2.1");
+     a2 = new FileAppender();
+     a2.setName("testAppender2.2");
 
-        logger = Logger.getLogger("test");
-        logger.addAppender(a1);
-        logger.addAppender(a2);
-        logger.removeAppender("testAppender2.1");
-        Enumeration enumeration = logger.getAllAppenders();
-        Appender aHat = (Appender) enumeration.nextElement();
-        assertEquals(a2, aHat);
-        assertTrue(!enumeration.hasMoreElements());
-    }  */
+     logger = Logger.getLogger("test");
+     logger.addAppender(a1);
+     logger.addAppender(a2);
+     logger.removeAppender("testAppender2.1");
+     Enumeration enumeration = logger.getAllAppenders();
+     Appender aHat = (Appender) enumeration.nextElement();
+     assertEquals(a2, aHat);
+     assertTrue(!enumeration.hasMoreElements());
+     }  */
 
     /**
      * Test if logger a.b inherits its appender from a.

@@ -19,7 +19,9 @@ import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,18 +30,21 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class StringBuilderEncoderTest {
 
+    SpyByteBufferDestination spyByteBufferDestination = Mockito.mock(SpyByteBufferDestination.class);
+
     @Test
     public void testEncodeText_TextFitCharBuff_BytesFitByteBuff() throws Exception {
         final StringBuilderEncoder helper = new StringBuilderEncoder(StandardCharsets.UTF_8, 16, 8 * 1024);
         final StringBuilder text = createText(15);
-        final SpyByteBufferDestination destination = new SpyByteBufferDestination(17, 17);
-        helper.encode(text, destination);
+        //final SpyByteBufferDestination destination = new SpyByteBufferDestination(17, 17);
+        spyByteBufferDestination = Mockito.spy(new SpyByteBufferDestination(17, 17));
+        helper.encode(text, spyByteBufferDestination);
 
-        assertEquals(0, destination.drainPoints.size(), "drained");
-        assertEquals(text.length(), destination.buffer.position(), "destination.buf.pos");
+        assertEquals(0, spyByteBufferDestination.drainPoints.size(), "drained");
+        assertEquals(text.length(), spyByteBufferDestination.buffer.position(), "destination.buf.pos");
 
         for (int i = 0; i < text.length(); i++) {
-            assertEquals((byte) text.charAt(i), destination.buffer.get(i), "char at " + i);
+            assertEquals((byte) text.charAt(i), spyByteBufferDestination.buffer.get(i), "char at " + i);
         }
     }
 
@@ -47,22 +52,23 @@ public class StringBuilderEncoderTest {
     public void testEncodeText_TextFitCharBuff_BytesDontFitByteBuff() throws Exception {
         final StringBuilderEncoder helper = new StringBuilderEncoder(StandardCharsets.UTF_8, 16, 8 * 1024);
         final StringBuilder text = createText(15);
-        final SpyByteBufferDestination destination = new SpyByteBufferDestination(14, 15);
-        helper.encode(text, destination);
+        //final SpyByteBufferDestination destination = new SpyByteBufferDestination(14, 15);
+        spyByteBufferDestination = Mockito.spy(new SpyByteBufferDestination(14, 15));
+        helper.encode(text, spyByteBufferDestination);
 
-        assertEquals(1, destination.drainPoints.size(), "drained");
-        assertEquals(0, destination.drainPoints.get(0).position, "drained[0].from");
-        assertEquals(destination.buffer.capacity(), destination.drainPoints.get(0).limit, "drained[0].to");
-        assertEquals(destination.buffer.capacity(), destination.drainPoints.get(0).length(), "drained[0].length");
-        assertEquals(text.length() - destination.buffer.capacity(),
-                destination.buffer.position(), "destination.buf.pos");
+        assertEquals(1, spyByteBufferDestination.drainPoints.size(), "drained");
+        assertEquals(0, spyByteBufferDestination.drainPoints.get(0).position, "drained[0].from");
+        assertEquals(spyByteBufferDestination.buffer.capacity(), spyByteBufferDestination.drainPoints.get(0).limit, "drained[0].to");
+        assertEquals(spyByteBufferDestination.buffer.capacity(), spyByteBufferDestination.drainPoints.get(0).length(), "drained[0].length");
+        assertEquals(text.length() - spyByteBufferDestination.buffer.capacity(),
+                spyByteBufferDestination.buffer.position(), "destination.buf.pos");
 
-        for (int i = 0; i < destination.buffer.capacity(); i++) {
-            assertEquals((byte) text.charAt(i), destination.drained.get(i), "char at " + i);
+        for (int i = 0; i < spyByteBufferDestination.buffer.capacity(); i++) {
+            assertEquals((byte) text.charAt(i), spyByteBufferDestination.drained.get(i), "char at " + i);
         }
-        for (int i = destination.buffer.capacity(); i < text.length(); i++) {
-            final int bufIx = i - destination.buffer.capacity();
-            assertEquals((byte) text.charAt(i), destination.buffer.get(bufIx), "char at " + i);
+        for (int i = spyByteBufferDestination.buffer.capacity(); i < text.length(); i++) {
+            final int bufIx = i - spyByteBufferDestination.buffer.capacity();
+            assertEquals((byte) text.charAt(i), spyByteBufferDestination.buffer.get(bufIx), "char at " + i);
         }
     }
 

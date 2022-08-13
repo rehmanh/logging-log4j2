@@ -19,11 +19,7 @@ package org.apache.logging.log4j.core;
 import java.net.URI;
 
 import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.core.config.AbstractConfiguration;
-import org.apache.logging.log4j.core.config.Configuration;
-import org.apache.logging.log4j.core.config.ConfigurationFactory;
-import org.apache.logging.log4j.core.config.ConfigurationSource;
-import org.apache.logging.log4j.core.config.LoggerConfig;
+import org.apache.logging.log4j.core.config.*;
 
 /**
  *
@@ -45,17 +41,17 @@ public class BasicConfigurationFactory extends ConfigurationFactory {
         return null;
     }
 
-    public class BasicConfiguration extends AbstractConfiguration {
-
-        private static final String DEFAULT_LEVEL = "org.apache.logging.log4j.level";
-
-        public BasicConfiguration() {
-            super(null, ConfigurationSource.NULL_SOURCE);
-
-            final LoggerConfig root = getRootLogger();
-            final String name = System.getProperty(DEFAULT_LEVEL);
-            final Level level = (name != null && Level.getLevel(name) != null) ? Level.getLevel(name) : Level.ERROR;
-            root.setLevel(level);
-        }
-    }
+//    public class BasicConfiguration extends AbstractConfiguration {
+//
+//        private static final String DEFAULT_LEVEL = "org.apache.logging.log4j.level";
+//
+//        public BasicConfiguration() {
+//            super(null, ConfigurationSource.NULL_SOURCE);
+//
+//            final LoggerConfig root = getRootLogger();
+//            final String name = System.getProperty(DEFAULT_LEVEL);
+//            final Level level = (name != null && Level.getLevel(name) != null) ? Level.getLevel(name) : Level.ERROR;
+//            root.setLevel(level);
+//        }
+//    }
 }

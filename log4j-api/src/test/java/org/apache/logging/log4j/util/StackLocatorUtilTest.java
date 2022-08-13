@@ -28,9 +28,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.ParentRunner;
 
-import sun.reflect.Reflection;
-
-/** 
+/**
  * Tests {@link StackLocatorUtilTest}.
  */
 @RunWith(BlockJUnit4ClassRunner.class)
@@ -39,10 +37,11 @@ public class StackLocatorUtilTest {
     @Test
     public void testStackTraceEquivalence() throws Exception {
         for (int i = 1; i < 15; i++) {
-            final Class<?> expected = Reflection.getCallerClass(i + StackLocator.JDK_7U25_OFFSET);
+            StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+            final Class<?> expected = elements[1].getClass();
             final Class<?> actual = StackLocatorUtil.getCallerClass(i);
             final Class<?> fallbackActual = Class.forName(
-                StackLocatorUtil.getStackTraceElement(i).getClassName());
+                    StackLocatorUtil.getStackTraceElement(i).getClassName());
             assertSame(expected, actual);
             assertSame(expected, fallbackActual);
         }
