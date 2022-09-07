@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.*;
 
 import java.util.List;
 
@@ -890,65 +891,49 @@ public class AbstractLoggerTest {
     @ResourceLock("log4j2.StatusLogger")
     public void testMessageThrows() {
         final ThrowableExpectingLogger logger = new ThrowableExpectingLogger(false);
-        logger.error(new TestMessage(() -> {
-            throw new IllegalStateException("Oops!");
-        }, "Message Format"));
+        final Message message = mockMessage("Message Format");
+        logger.error(message);
+
         final List<StatusData> statusDatalist = StatusLogger.getLogger().getStatusData();
         final StatusData mostRecent = statusDatalist.get(statusDatalist.size() - 1);
         assertEquals(Level.WARN, mostRecent.getLevel());
         assertThat(mostRecent.getFormattedStatus(), containsString(
                 "org.apache.logging.log4j.spi.AbstractLogger caught " +
-                        "java.lang.IllegalStateException logging TestMessage: Message Format"));
+                        "java.lang.IllegalStateException logging Message"));
+        assertThat(mostRecent.getFormattedStatus(), containsString(": Message Format"));
     }
 
     @Test
     @ResourceLock("log4j2.StatusLogger")
     public void testMessageThrowsAndNullFormat() {
         final ThrowableExpectingLogger logger = new ThrowableExpectingLogger(false);
-        logger.error(new TestMessage(() -> {
-            throw new IllegalStateException("Oops!");
-        }, null /* format */));
+        final Message message = mockMessage(null);
+        logger.error(message);
+
         final List<StatusData> statusDatalist = StatusLogger.getLogger().getStatusData();
         final StatusData mostRecent = statusDatalist.get(statusDatalist.size() - 1);
         assertEquals(Level.WARN, mostRecent.getLevel());
         assertThat(mostRecent.getFormattedStatus(), containsString(
                 "org.apache.logging.log4j.spi.AbstractLogger caught " +
-                        "java.lang.IllegalStateException logging TestMessage: "));
+                        "java.lang.IllegalStateException logging Message"));
     }
 
-//    private static final class TestMessage implements Message {
-//        private final FormattedMessageSupplier formattedMessageSupplier;
-//        private final String format;
-//
-//        TestMessage(final FormattedMessageSupplier formattedMessageSupplier, final String format) {
-//            this.formattedMessageSupplier = formattedMessageSupplier;
-//            this.format = format;
-//        }
-//
-//        @Override
-//        public String getFormattedMessage() {
-//            return formattedMessageSupplier.getFormattedMessage();
-//        }
-//
-//        @Override
-//        public String getFormat() {
-//            return format;
-//        }
-//
-//        @Override
-//        public Object[] getParameters() {
-//            return Constants.EMPTY_OBJECT_ARRAY;
-//        }
-//
-//        @Override
-//        public Throwable getThrowable() {
-//            return null;
-//        }
-//
-//        interface FormattedMessageSupplier {
-//            String getFormattedMessage();
-//        }
-//    }
+    private Message mockMessage(String messageFormat) {
+        Message message = mock(Message.class);
+        when(message.getFormattedMessage()).thenAnswer((args) -> {
+            throw new IllegalStateException("Oops!");
+        });
+        when(message.getFormat()).thenAnswer((args) -> {
+            return messageFormat;
+        });
+        when(message.getParameters()).thenAnswer((args) -> {
+            return Constants.EMPTY_OBJECT_ARRAY;
+        });
+        when(message.getThrowable()).thenAnswer((args) -> {
+            return null;
+        });
+        return message;
+    }
 
     private static class CountingLogger extends AbstractLogger {
         private static final long serialVersionUID = -3171452617952475480L;
